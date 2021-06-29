@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+
+    "origin": ["unifaya-official.firebaseapp.com"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  },
+
+
+  "exclude": [
+    "node_modules"
+  ]
+}
