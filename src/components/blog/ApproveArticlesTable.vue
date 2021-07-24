@@ -61,54 +61,74 @@ export default {
           sortable: true
         },
         {name: 'userId', align: 'center', label: 'userId', field: row => row.userUid},
-        {name: 'Article Title', style:'white-space: nowrap; max-width: 15px; width: 100px; overflow: hidden; text-overflow: "----";', align: 'center', label: 'Article Title', field: row => row.context.title},
-        {name: 'text', style:'white-space: nowrap; max-width: 5px; width: 100px; overflow: hidden; text-overflow: "----";', label: 'Text', field: row => row.context.text, sortable: true},
-        {name: 'description', style:'white-space: nowrap; max-width: 50px; width: 100px; overflow: hidden; text-overflow: "----";', label: 'Description', field: row => row.context.description},
-        {name: 'articleLink', style:'white-space: nowrap; max-width: 50px; width: 300px; overflow: hidden; text-overflow: "----";', label: 'Link To Article', field: 'articleLink'},
+        {
+          name: 'Article Title',
+          style: 'white-space: nowrap; max-width: 15px; width: 100px; overflow: hidden; text-overflow: "----";',
+          align: 'center',
+          label: 'Article Title',
+          field: row => row.context.title
+        },
+        {
+          name: 'text',
+          style: 'white-space: nowrap; max-width: 5px; width: 100px; overflow: hidden; text-overflow: "----";',
+          label: 'Text',
+          field: row => row.context.text,
+          sortable: true
+        },
+        {
+          name: 'description',
+          style: 'white-space: nowrap; max-width: 50px; width: 100px; overflow: hidden; text-overflow: "----";',
+          label: 'Description',
+          field: row => row.context.description
+        },
+        {
+          name: 'articleLink',
+          style: 'white-space: nowrap; max-width: 50px; width: 300px; overflow: hidden; text-overflow: "----";',
+          label: 'Link To Article',
+          field: 'articleLink'
+        },
       ],
     }
   },
 
 
   computed: mapState('articlesStore', ['articleId', 'articles']),
-  watch: {
-    async selectedGroups(articles){
+
+  watch:{
+    async selectedGroups(articles) {
       const arr = []
-      if(this.users) {
+      if (this.articles) {
         await articles.map(article => {
-          article.members.map(article => {
-            const validation = this.selected.some(user => user.id === article.id)
-            if(!validation) {
-              arr.push(article)
+          article.map(member => {
+            const validation = this.selected.some(aArticle => aArticle.id === member.id)
+            if (!validation) {
+              arr.push(member)
             }
           })
         })
         this.selected = arr;
       }
-    },
-  },
-  methods: {
-
-    ...mapActions('articlesStore', ['getArticlesAC']),
-    ...mapMutations("articlesStore", ['setEditedArticlesId']),
-
-
-    deleteArticleById(id) {
-      this.setEditedArticlesId(id);
-      this.deleteArticle(id);
-    },
-    async getArticles() {
-      await this.getArticlesAC()
-    },
-    getSelectedString () {
-      return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.articles.length}`
     }
   },
-  async created() {
-    await this.getArticlesAC()
-    console.log('articles: ', this.articles)
-  },
 
+    methods: {
+
+      ...mapActions('articlesStore', ['getArticlesAC']),
+      ...mapMutations("articlesStore", ['setEditedArticlesId', 'setArticles']),
+
+
+      deleteArticleById(id) {
+        this.setEditedArticlesId(id);
+        this.deleteArticle(id);
+      },
+      getSelectedString() {
+        return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.articles.length}`
+      }
+    },
+    async created() {
+      await this.getArticlesAC();
+      console.log('articles: ', this.articles)
+    },
 }
 </script>
 
