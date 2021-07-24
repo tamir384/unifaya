@@ -8,7 +8,6 @@ async function readVideos(){
 
     return await firebaseInstance.firebase.firestore().collection(`videos`).doc(window.user.uid).collection('{categories}').get()
         .then(docs => {
-            debugger;
             docs.forEach(doc => {
                 arr.push(doc.data())
                 console.log('docs', docs)
@@ -46,7 +45,6 @@ function insertCollection(object){
 
     // object.uid = window.user.uid;
     object.id = firebaseInstance.firebase.firestore().collection(`videos`).doc().id;
-    debugger
     firebaseInstance.firebase.firestore().collection(`videos`).doc(object.id)
        .set(object)
         .then(r => console.log(r, 'SUCCESS'))

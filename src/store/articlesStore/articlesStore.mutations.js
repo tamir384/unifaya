@@ -1,22 +1,22 @@
 export default {
 
-    setArticles: ((state, articles) => state.articles = articles),
+    setArticles: ((state, articles) => {
+
+        articles.forEach(article => state.articles.push(article));
+        state.articles = articles
+    } ),
 
     setEditedArticlesId: ((state, id) => state.editedArticlesId = id),
 
-    setEditedArticles: ((state, article) => {
-        debugger;
-        Object.assign(state.editedArticle, article)
+    setEditedArticles: ((state, articles) => {
+        Object.assign(state.articles, articles);
     }),
 
     resetEditedArticlesId: ((state) => state.resetEditedArticlesId = ''),
 
     resetEditedArticles: ((state) => {
-        for (const key in state.editedArticle) {
-            state.editedArticle[key] = '';
-        }
-        if (state.editedArticle.id) {
-            delete state.editedArticle.id;
+        for (const key in state.article) {
+            state.article[key] = '';
         }
     }),
 
@@ -25,11 +25,11 @@ export default {
         state.articles.splice(index, 1, article)
     }),
     deleteArticle: ((state) => {
-        const index = state.articles.findIndex(p => p.id === state.editedArticleId)
+        const index = state.articles.findIndex(p => p.id === state.articleId)
         state.articles.splice(index, 1)
     }),
-    insertArticle: ((state, article) => {
-        state.articles.push(article)
+    setArticle: ((state, article) => {
+        state.article = article;
     })
 
 }

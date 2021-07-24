@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../pages/Home/Home.vue'
+import Home from '../pages/home/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -13,61 +13,67 @@ const routes = [
   {
     path: '/LoginPage',
     name: 'LoginPage',
-    component: () => import('../pages/Login/LoginPage.vue'),
+    component: () => import('../pages/login/LoginPage.vue'),
     meta: { authNotRequired: true }
   },
   {
     path: '/user/:id',
     name: 'User',
-    component: () => import('../pages/User/User.vue'),
+    component: () => import('../pages/user/User.vue'),
     meta: { authNotRequired: false },
   },
   {
-    path: '/registeredUsers',
-    name: 'registeredUsers',
-    component: () => import('../pages/Favorites/FavoritesPage.vue'),
+    path: '/favorites',
+    name: 'FavoritesPage',
+    component: () => import('../pages/favorites/FavoritesPage.vue'),
     meta: { authNotRequired: false },
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('../pages/Register/RegisterPage.vue'),
+    component: () => import('../pages/register/RegisterPage.vue'),
     meta: { authNotRequired: true },
   },
   {
     path: '/videos',
     name: 'videos',
-    component: () => import('../pages/Videos/VideosPage.vue'),
+    component: () => import('../pages/videos/VideosPage.vue'),
     meta: { authNotRequired: true },
   },
   {
     path: '/UploadVideos',
     name: 'uploadVideos',
-    component: () => import('../pages/Videos/UploadVideosPage.vue'),
+    component: () => import('../pages/videos/UploadVideosPage.vue'),
     meta: { authNotRequired: false },
   },
   {
     path: '/ApproveVideos',
     name: 'ApproveVideos',
-    component: () => import('../pages/Videos/ApproveVideos.vue'),
+    component: () => import('../pages/videos/ApproveVideos.vue'),
     meta: { authNotRequired: false },
   },
   {
     path: '/ApproveArticles',
     name: 'ApproveArticles',
-    component: () => import('../pages/Blog/ApproveArticles.vue'),
+    component: () => import('../pages/blog/ApproveArticles.vue'),
     meta: { authNotRequired: false },
   },
   {
     path: '/PostArticles',
     name: 'postArticles',
-    component: () => import('../pages/Blog/PostArticles.vue'),
+    component: () => import('../pages/blog/PostArticles.vue'),
     meta: { authNotRequired: false },
   },
   {
     path: '/blog',
     name: 'blog',
-    component: () => import('../pages/Blog/Blog.vue'),
+    component: () => import('../pages/blog/Blog.vue'),
+    meta: { authNotRequired: true },
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: () => import('../pages/blog/Article.vue'),
     meta: { authNotRequired: true },
   },
   {

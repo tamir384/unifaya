@@ -1,39 +1,29 @@
-import firestore from '../../middleware/firebase/firestore/videos';
-import database from "../../middleware/firebase/database";
+import firestore from '../../middleware/firebase/firestore/articles';
 
 
 export default {
 
-    insertArticle: async ({state, commit}) => {
-
-        const localArticlesId = [];
-
-        const localCategories = [];
-
-
-        const article = {};
-
-        Object.assign(article, state.editedArticle);
-
-
-        await firestore.insertCollection(article);
-
-
-        commit('resetEditedArticle');
-
-        commit('insertArticle', article);
+    insertArticle: async ({}, context) => {
+        debugger
+       await firestore.insertCollection(context)
+            .catch(e => console.error(e))
+        debugger;
     },
 
 
-
-    getHoldedArticles: async ({commit}) => {
-// const users = state.videos.
-//
-//         Object.assign(users)
+    getArticlesAC: async ({commit}) => {
 
         const articles = await firestore.getHoldedArticles();
 
-        commit('setVideos', articles)
+        commit('setArticles', articles)
+
+    },
+
+    getArticleByIdAC: async ({commit}, articleId) =>{
+        const article = await firestore.getSpecArticle(articleId);
+
+        commit('setArticle', article)
+        debugger;
     },
 
     deleteArticle: async ({state, commit},id) => {

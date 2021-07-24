@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import LoginInputs from "../../components/Login/LoginInputs";
-import GoogleSignButton from "../../components/Login/GoogleSignButton";
+import LoginInputs from "../../components/login/LoginInputs";
+import GoogleSignButton from "../../components/login/GoogleSignButton";
 
 
 export default {

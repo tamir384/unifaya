@@ -8,7 +8,7 @@
 
 <script>
 
-import HomeButtons from "../../components/Buttons/HomeButtons";
+import HomeButtons from "../../components/buttons/HomeButtons";
 export default {
   name:'Home',
   components: {

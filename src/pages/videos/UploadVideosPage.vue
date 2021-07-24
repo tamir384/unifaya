@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import UploadVideosToFirestore from "../../components/Videos/UploadVideosToFirestore";
+import UploadVideosToFirestore from "../../components/videos/UploadVideosToFirestore";
 
 export default {
   name: "UploadVideosPage",

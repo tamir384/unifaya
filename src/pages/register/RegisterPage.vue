@@ -10,7 +10,7 @@
 
 <script>
 
-import RegisterInputs from "../../components/Register/RegisterInputs";
+import RegisterInputs from "../../components/register/RegisterInputs";
 
 export default {
   name: "RegisterPage",

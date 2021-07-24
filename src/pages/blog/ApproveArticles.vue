@@ -8,13 +8,15 @@
 </template>
 
 <script>
-import ApproveArticlesTable from "../../components/Blog/ApproveArticlesTable";
+import ApproveArticlesTable from "../../components/blog/ApproveArticlesTable";
 export default {
   name: "ApproveArticles",
   components: {ApproveArticlesTable},
   methods: {
     goToHomePage() {
       this.$router.push('/')
+    },
+    created(){
     },
   }
 }

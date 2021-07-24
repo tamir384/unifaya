@@ -5,7 +5,6 @@ export default {
     setEditedVideoId: ((state, id) => state.editedVideoId = id),
 
     setEditedVideo: ((state, video) => {
-        debugger;
         Object.assign(state.editedVideo, video)
     }),
 

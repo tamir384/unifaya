@@ -2,7 +2,7 @@
   <div class="q-pa-md">
 
     <q-table
-        :title="'Videos'"
+        :title="'videos'"
         :data="users"
         :columns="columns"
         row-key="name"

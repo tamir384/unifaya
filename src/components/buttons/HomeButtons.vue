@@ -58,7 +58,7 @@ export default {
       }
 
       if (user) {
-        // User is signed in.
+        // user is signed in.
         return true;
       } else {
         // No user is signed in.

@@ -12,13 +12,10 @@
 
     <q-separator/>
 
-    <q-tab-panels v-model="tab" animated class="bg-teal-2 text-dark">
-      <q-tab-panel name="socialArticles">
-        <div class="text-h6">שם של המאמר 1</div>
-        1 תקציר המאמר
-        <q-separator/>
-        <div class="text-h6">שם של המאמר 2</div>
-        תקציר המאמר2
+    <q-tab-panels v-for="article of this.articles" v-model="tab" animated class="bg-teal-2 text-dark">
+      <q-tab-panel  name="socialArticles">
+        <div class="text-h6 articleTabs">{{article.context.title}}</div>
+        {{article.context.description}}
       </q-tab-panel>
 
       <q-tab-panel name="socialArticles">
@@ -44,6 +41,8 @@
 </template>
 
 <script>
+import {mapState, mapMutations, mapActions} from 'vuex'
+
 export default {
   name: "BlogTabs",
   data() {
@@ -51,7 +50,15 @@ export default {
       tab: 'asdasd'
     }
   },
+  computed:{
+    ...mapState('articlesStore',['articles'])
+  },
+
   methods:{
+    ...mapActions('articlesStore',['getArticlesAC'])
+  },
+  created() {
+    this.getArticlesAC();
   }
 }
 </script>

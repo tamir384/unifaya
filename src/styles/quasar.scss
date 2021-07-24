@@ -74,7 +74,7 @@ body {
   padding: 0.5%;
   text-align: center;
   color: #000000;
-  text-shadow: 0px 4px 8px #c9ba30, 0 0 40px #fff5c9, 0 0 20px #eed488;
+  text-shadow: 0 4px 8px #c9ba30, 0 0 40px #fff5c9, 0 0 20px #eed488;
 }
 
 .homePageRedirect {
@@ -84,4 +84,33 @@ body {
   margin-left: 90%;
   border: none;
   border-radius: 15px;
+}
+
+.articleDiv{
+  display: flex;
+  justify-content: center;
+}
+
+.articleCards{
+  direction: rtl;
+  width: 80vw;
+  height: 80vh;
+  overflow: auto;
+}
+
+.articleHeader{
+  color: #3e0000;
+  font-size: 60px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.articleDescription{
+  font-size: 30px;
+  color: rgba(39, 102, 82, 0.55);
+  text-align: center;
+}
+
+.articleTabs{
+overflow: auto;
 }

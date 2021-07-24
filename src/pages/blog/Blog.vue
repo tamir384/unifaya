@@ -10,7 +10,7 @@
 
 <script>
 
-import BlogTabs from "../../components/Blog/BlogTabs";
+import BlogTabs from "../../components/blog/BlogTabs";
 
 export default {
   name: "Blog",

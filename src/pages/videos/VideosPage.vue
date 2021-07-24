@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import VideoCards from "../../components/Videos/VideoCards";
+import VideoCards from "../../components/videos/VideoCards";
 export default {
   name: "VideosPage",
   components: {

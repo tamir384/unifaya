@@ -1,11 +1,13 @@
 export default {
     articles: [],
-    editedArticleId: '',
-    editedArticle: {
-        userName: '',
-        articleTitle: '',
-        category: '',
-        description: '',
-        holding: undefined,
+    articleId: '',
+    article: {
+        // userName: '',
+        // userUid: '',
+        // context: {
+        //     title: '',
+        //     description: '',
+        //     text: '',
+        // }
     }
 }

@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import storage from 'firebase/storage';
-import firestore from "firebase/firestore";
+import "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -15,6 +14,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+console.log(`firebase.initializeApp(firebaseConfig)`)
 
 
 firebase.auth().onAuthStateChanged(async user => {
@@ -29,5 +29,5 @@ firebase.auth().onAuthStateChanged(async user => {
 })
 
 export default {
-    firebase
+    firebase,
 }

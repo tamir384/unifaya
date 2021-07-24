@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import Home from './pages/Home/Home.vue'
+import Home from './pages/home/Home.vue'
 import {mapActions} from 'vuex'
-import HomeButtons from "./components/Buttons/HomeButtons";
+import HomeButtons from "./components/buttons/HomeButtons";
 
 export default {
   name: 'LayoutDefault',
