@@ -23,7 +23,6 @@ export default {
         const article = await firestore.getSpecArticle(articleId);
 
         commit('setArticle', article)
-        debugger;
     },
 
     deleteArticle: async ({state, commit},id) => {

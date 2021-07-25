@@ -2,16 +2,13 @@ import firebaseInstance from '../../';
 
 
  async function insertCollection(object) {
-    debugger;
     object.id = firebaseInstance.firebase.firestore().collection(`articles`).doc().id;
-    debugger;
-   await firebaseInstance.firebase.firestore().collection(`articles`).doc(object.userUid)
-        .collection('data').doc(object.id).set(object)
+   await firebaseInstance.firebase.firestore().collection(`articles`).doc(object.id).set(object)
 }
 
 async function getHoldedArticles() {
     const arr = []
-    await firebaseInstance.firebase.firestore().collection('articles').doc(window.user.uid).collection('data').get()
+    await firebaseInstance.firebase.firestore().collection('articles').get()
         .then(docs => {
             docs.forEach(doc => {
                 arr.push(doc.data())
@@ -23,7 +20,7 @@ async function getHoldedArticles() {
 
 async function getSpecArticle(articleId) {
     const article = {};
-    await firebaseInstance.firebase.firestore().collection('articles').doc(window.user.uid).collection('data').doc(articleId).get()
+    await firebaseInstance.firebase.firestore().collection('articles').doc(articleId).get()
         .then(doc => {
             Object.assign(article, doc.data())
         })

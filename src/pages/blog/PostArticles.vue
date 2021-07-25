@@ -2,7 +2,7 @@
   <div>
     <q-btn v-show="this.isAdmin" style="font-size: 140%; width: 10%; background-color: rgba(255,0,0,0.67)"
            @click="goToApproveArticles()"
-           glossy label="Approve"/>
+           glossy label="אישור מאמרים"/>
     <div class="freeText" style="width: 1000px; direction: rtl">
       <q-input color="black" bg-color="grey-6" v-model="context.title" label="כותרת"/>
       <q-input color="black" bg-color="grey-6" v-model="context.description" label="תקציר"/>
@@ -38,7 +38,7 @@ export default {
         description: '',
         text: '',
       },
-      userName: (window.user.displayName),
+      userName: (window.user.displayName) || localStorage.getItem('displayName'),
       userUid: (window.user.uid),
       isAdmin: window.user.uid === "h8aXlN8o8Ggp8KeJHS4YYevm0DT2",
     }
@@ -56,14 +56,12 @@ export default {
       this.$router.push('/');
     },
     uploadText() {
-      debugger
       firestore.insertCollection({
         context: this.context,
-        userName: window.user.displayName,
+        userName: this.userName,
         userUid: window.user.uid,
         approved: false
       });
-      debugger
     },
     goToApproveArticles() {
       this.$router.push('/ApproveArticles')

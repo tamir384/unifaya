@@ -1,39 +1,37 @@
 <template>
   <div class="blogTabBox">
     <h1 id="mainHeaderBlog" class="mainHeadersTxt">מאמרים</h1>
+    <q-btn style=" width: 9%; background-color: rgba(255,0,0,0.67)" glossy id="editButton" @click="postNewArticle()">כתיבת מאמר</q-btn>
     <q-tabs
         v-model="tab"
         inline-label
         class="bg-brown-8 text-white shadow-2"
     >
-      <q-tab class="full-width" name="socialArticles" icon="fas fa-feather-alt" label="מאמרים שיתופיים"/>
+      <q-tab class="full-width" name="socialArticles" icon="fas fa-feather-alt" label="מאמרים שיתופיים">
+      </q-tab>
       <q-tab class="full-width" name="mainArticles" icon="whatshot" label="מאמרים של בעל האתר"/>
     </q-tabs>
 
     <q-separator/>
 
     <q-tab-panels v-for="article of this.articles" v-model="tab" animated class="bg-teal-2 text-dark">
-      <q-tab-panel  name="socialArticles">
-        <div class="text-h6 articleTabs">{{article.context.title}}</div>
+      <q-tab-panel v-if="article.userUid === isAdmin" name="mainArticles">
+        {{article.userName}}
+        <div @click="$router.push(`/article/${article.id}`)" class="text-h6 articleTabs">
+          <a>{{article.context.title}}</a>
+        </div>
         {{article.context.description}}
-      </q-tab-panel>
-
-      <q-tab-panel name="socialArticles">
-        <div class="text-h7">שם של המאמר 2</div>
-        2 תקציר המאמר
-      </q-tab-panel>
-
-      <q-tab-panel name="mainArticles">
-        <div class="text-h6">שם של המאמר 3</div>
-        3 תקציר המאמר
         <q-separator/>
-        <div class="text-h6">שם של המאמר 4</div>
-        תקציר המאמר4
       </q-tab-panel>
 
-      <q-tab-panel name="socialArticles">
-        <div class="text-h7">שם של המאמר 2</div>
-        2 תקציר המאמר
+
+      <q-tab-panel v-if="article.userUid !== isAdmin" name="socialArticles">
+        {{article.userName}}
+        <div @click="$router.push(`/article/${article.id}`)" class="text-h6 articleTabs">
+          <a>{{article.context.title}}</a>
+        </div>
+        {{article.context.description}}
+        <q-separator/>
       </q-tab-panel>
     </q-tab-panels>
 
@@ -47,7 +45,9 @@ export default {
   name: "BlogTabs",
   data() {
     return {
-      tab: 'asdasd'
+      tab: 'asdasd',
+      isAdmin: 'h8aXlN8o8Ggp8KeJHS4YYevm0DT2',
+      currentUserUid: localStorage.getItem(user.uid)
     }
   },
   computed:{
@@ -55,7 +55,12 @@ export default {
   },
 
   methods:{
-    ...mapActions('articlesStore',['getArticlesAC'])
+    ...mapActions('articlesStore',['getArticlesAC']),
+
+    postNewArticle(){
+      this.$router.push('/PostArticles')
+    }
+
   },
   created() {
     this.getArticlesAC();
