@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-console.log(`firebase.initializeApp(firebaseConfig)`)
 
 
 firebase.auth().onAuthStateChanged(async user => {

@@ -10,8 +10,6 @@
         virtual-scroll
         :pagination.sync="pagination"
         :rows-per-page-options="[0]"
-        selection="multiple"
-        :selected.sync="selected"
     >
       <template v-slot:body-cell-articleLink="props">
           <q-td key="articleLink" :props="props" >
@@ -19,13 +17,11 @@
           </q-td>
       </template>
 
-      <template v-slot:top-right>
-        <q-tr>
-          <q-td>
-            <q-btn>delete</q-btn>
+      <template v-slot:body-cell-actions="props">
+          <q-td key="actions" :props="props">
+            <q-btn @click="deleteArticleById(props.row.id)">delete</q-btn>
             <q-btn>approve</q-btn>
           </q-td>
-        </q-tr>
       </template>
 
 
@@ -46,8 +42,6 @@ export default {
   data() {
     return {
       rowKey: '',
-      // rows: [],
-      selected: [],
       userUid: window.user.uid,
       pagination: {
         rowsPerPage: 0,
@@ -87,6 +81,7 @@ export default {
           label: 'Link To Article',
           field: 'articleLink'
         },
+        {name: 'actions', align: 'center', label: 'Actions'},
       ],
     }
   },
@@ -94,36 +89,21 @@ export default {
 
   computed: mapState('articlesStore', ['articleId', 'articles']),
 
-  watch:{
-    async selectedGroups(articles) {
-      const arr = []
-      if (this.articles) {
-        await articles.map(article => {
-          article.map(member => {
-            const validation = this.selected.some(aArticle => aArticle.id === member.id)
-            if (!validation) {
-              arr.push(member)
-            }
-          })
-        })
-        this.selected = arr;
-      }
-    }
-  },
 
     methods: {
 
-      ...mapActions('articlesStore', ['getArticlesAC']),
-      ...mapMutations("articlesStore", ['setEditedArticlesId', 'setArticles']),
+      ...mapActions('articlesStore', ['getArticlesAC', 'deleteArticle']),
+      ...mapMutations("articlesStore", ['setEditedArticleId', 'setArticles']),
 
 
       deleteArticleById(id) {
-        this.setEditedArticlesId(id);
+        this.setEditedArticleId(id);
         this.deleteArticle(id);
       },
-      getSelectedString() {
-        return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.articles.length}`
-      }
+
+      approveArticleById(id){
+
+      },
     },
     async created() {
       await this.getArticlesAC();

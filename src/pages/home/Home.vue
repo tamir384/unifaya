@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1 class="mainHeadersTxt">ברוכים הבאים</h1>
+    <h1 class="mainHeadersTxt">Unifaya</h1>
     <HomeButtons/>
   </div>
-
 </template>
 
 <script>
@@ -23,5 +22,9 @@ export default {
 </script>
 
 <style>
+
+body{
+  overflow: hidden;
+}
 
 </style>

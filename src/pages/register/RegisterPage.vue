@@ -3,7 +3,9 @@
     <form class="loginInputBox">
   <RegisterInputs></RegisterInputs>
     </form>
-    <q-btn @click="goToHomePage()" style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy id="homeRegButton" class="homePageRedirect">דף הבית
+    <q-btn @click="goToHomePage()"
+           style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy
+           class="homePageRedirect fixed-bottom">דף הבית
     </q-btn>
   </div>
 </template>

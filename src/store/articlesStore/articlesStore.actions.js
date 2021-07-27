@@ -27,7 +27,7 @@ export default {
 
     deleteArticle: async ({state, commit},id) => {
 
-        await firestore.deleteArticle(id);
+        await firestore.deleteArticleById(id);
 
         commit('deleteArticle');
 

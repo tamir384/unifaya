@@ -13,7 +13,7 @@
     </q-tabs>
 
     <q-separator/>
-
+<div class="globalArticles">
     <q-tab-panels v-for="article of this.articles" v-model="tab" animated class="bg-teal-2 text-dark">
       <q-tab-panel v-if="article.userUid === isAdmin" name="mainArticles">
         {{article.userName}}
@@ -25,7 +25,8 @@
       </q-tab-panel>
 
 
-      <q-tab-panel v-if="article.userUid !== isAdmin" name="socialArticles">
+
+      <q-tab-panel v-if="article.userUid !== isAdmin && article.approved === true" name="socialArticles">
         {{article.userName}}
         <div @click="$router.push(`/article/${article.id}`)" class="text-h6 articleTabs">
           <a>{{article.context.title}}</a>
@@ -34,12 +35,12 @@
         <q-separator/>
       </q-tab-panel>
     </q-tab-panels>
-
+</div>
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations, mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: "BlogTabs",
@@ -47,7 +48,6 @@ export default {
     return {
       tab: 'asdasd',
       isAdmin: 'h8aXlN8o8Ggp8KeJHS4YYevm0DT2',
-      currentUserUid: localStorage.getItem(user.uid)
     }
   },
   computed:{
@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .blogTabBox {
   display: inline-block;
@@ -83,6 +83,11 @@ export default {
 
 #mainHeaderBlog {
   margin-top: 1%;
+}
+
+.globalArticles{
+  overflow-y: scroll;
+  max-height: 400px;
 }
 
 

@@ -18,13 +18,17 @@ async function getHoldedArticles() {
     return arr;
 }
 
-async function getSpecArticle(articleId) {
+async function getSpecArticle(Id) {
     const article = {};
-    await firebaseInstance.firebase.firestore().collection('articles').doc(articleId).get()
+    await firebaseInstance.firebase.firestore().collection('articles').doc(Id).get()
         .then(doc => {
             Object.assign(article, doc.data())
         })
     return article;
+}
+
+async function deleteArticleById(id){
+     return await firebaseInstance.firebase.firestore().collection('articles').doc(id).delete()
 }
 
 
@@ -32,4 +36,5 @@ export default {
     insertCollection,
     getHoldedArticles,
     getSpecArticle,
+    deleteArticleById,
 }

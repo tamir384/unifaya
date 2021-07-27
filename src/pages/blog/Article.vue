@@ -18,6 +18,10 @@
         {{ article.context.text }}
       </q-card-section>
     </q-card>
+    <q-btn @click="goToHomePage()"
+           style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy
+           class="homePageRedirect fixed-bottom">דף הבית
+    </q-btn>
   </div>
 </template>
 
@@ -27,14 +31,20 @@ import {mapActions, mapState} from 'vuex'
 export default {
   name: "Article",
   data() {
-    return {}
+    return {
+
+    }
   },
 
   computed: {
     ...mapState('articlesStore', ['article'])
   },
   methods: {
-    ...mapActions('articlesStore', ['getArticleByIdAC'])
+    ...mapActions('articlesStore', ['getArticleByIdAC']),
+
+    goToHomePage() {
+      this.$router.push('/');
+    },
   },
 
 

@@ -5,9 +5,9 @@
       <br>
       <GoogleSignButton id="googleSignInButton"/>
     </form>
-    <q-btn id="hmpglgn" @click="goToHomePage()"
+    <q-btn @click="goToHomePage()"
            style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy
-           class="homePageRedirect">דף הבית
+           class="homePageRedirect fixed-bottom">דף הבית
     </q-btn>
   </div>
 </template>

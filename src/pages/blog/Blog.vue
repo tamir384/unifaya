@@ -1,9 +1,10 @@
 <template>
   <div>
     <BlogTabs/>
-  <q-btn id="homeRegButton" @click="goToHomePage()" style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy
-          class="homePageRedirect">דף הבית
-  </q-btn>
+    <q-btn id="newArtBtn" @click="goToHomePage()"
+           style="font-size: 140%; width: 10%; background-color: rgba(38,38,38,0.67)" glossy
+           class="homePageRedirect fixed-bottom">דף הבית
+    </q-btn>
   </div>
 </template>
 
