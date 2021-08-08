@@ -79,7 +79,7 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../pages/about/About.vue')
   },
   {
   path: '/test',
@@ -87,6 +87,7 @@ const routes = [
     component: () => import('../pages/test/Test.vue'),
     meta: { authNotRequired: true },
 },
+
 ]
 
 const router = new VueRouter({

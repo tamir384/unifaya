@@ -20,22 +20,18 @@
       <template v-slot:body-cell-actions="props">
         <q-td key="actions" :props="props">
           <q-btn @click="deleteArticleById(props.row.id)">delete</q-btn>
-          <q-btn v-if="!props.row.approved" @click="approveArticle(props.row)">approve</q-btn>
         </q-td>
       </template>
-
-
     </q-table>
-
 
   </div>
 </template>
 
 <script>
-import {mapState, mapActions, mapMutations} from 'vuex'
+import {mapActions, mapMutations, mapState} from "vuex";
 
 export default {
-  name: "ApproveArticlesTable",
+  name: "SavedArticlesTable",
 
   data() {
     return {
@@ -81,12 +77,6 @@ export default {
           field: row => row.context.description
         },
         {
-          name: 'approved',
-          label: 'Approved',
-          field: row => row.approved,
-          sortable: true
-        },
-        {
           name: 'articleLink',
           style: 'white-space: nowrap; max-width: 50px; width: 300px; overflow: hidden; text-overflow: "----";',
           label: 'Link To Article',
@@ -102,28 +92,26 @@ export default {
 
 
   methods: {
-
-    ...mapActions('articlesStore', ['getArticlesAC', 'deleteArticle', 'updateArticle']),
-    ...mapMutations("articlesStore", ['setArticleId']),
+    ...mapActions('articlesStore', ['getSavedArticlesAC', 'deleteArticleFromFavorites']),
+    ...mapMutations("articlesStore", ['setArticleId', 'resetArticles']),
 
 
     async deleteArticleById(id) {
       await this.setArticleId(id);
-     await this.deleteArticle(id);
+      await this.deleteArticleFromFavorites(id)
     },
 
-    approveArticle(article) {
-      article.approved = true;
-      this.updateArticle(article)
-    },
+
   },
-  async created() {
-    await this.getArticlesAC();
-  },
+  async created(){
+    await this.getSavedArticlesAC();
+    console.log(this.articles);
+  }
 }
 </script>
 
 <style lang="sass" scoped>
+
 
 .my-sticky-dynamic
   /* height or max-height is important */

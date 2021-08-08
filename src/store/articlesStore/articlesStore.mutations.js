@@ -6,15 +6,15 @@ export default {
         state.articles = articles
     } ),
 
-    setEditedArticleId: ((state, id) => state.editedArticleId = id),
+    setArticleId: ((state, id) => state.articleId = id),
 
     setEditedArticles: ((state, articles) => {
         Object.assign(state.articles, articles);
     }),
 
-    resetEditedArticleId: ((state) => state.resetEditedArticleId = ''),
+    resetEditedArticleId: ((state) => state.articleId = ''),
 
-    resetEditedArticles: ((state) => {
+    resetArticles: ((state) => {
         for (const key in state.article) {
             state.article[key] = '';
         }

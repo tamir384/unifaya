@@ -40,7 +40,7 @@ async function updateUser(id, user){
     return await firebaseInstance.firebase.firestore().doc(`users/${window.user.uid}/users/${id}`).update(user);
 }
 
-function insertCollection(object){
+function insertVideo(object){
 
 
     // object.uid = window.user.uid;
@@ -69,7 +69,7 @@ async function approveVideos(){
 }
 
 export default {
-    insertCollection,
+    insertVideo,
     readVideos,
     getUserById,
     getThisUserId,

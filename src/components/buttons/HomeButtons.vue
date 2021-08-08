@@ -8,10 +8,8 @@
       <q-btn v-if="isConnected" @click="signOut()" glossy class="homeButtons">התנתק
       </q-btn>
       <q-btn glossy class="homeButtons" @click="goToBlogPage()">בלוג</q-btn>
-      <q-btn @click="gotToVideosPage()" glossy class="homeButtons">סרטונים</q-btn>
-      <q-btn glossy class="homeButtons">על עצמי</q-btn>
-      <q-btn @click="goToRegisteredUsers()" glossy class="homeButtons">מועדפים
-      </q-btn>
+      <q-btn @click="goToFavorites()" glossy class="homeButtons">מועדפים</q-btn>
+      <q-btn @click="goToAboutPage()" glossy class="homeButtons">אודות</q-btn>
     </div>
   </div>
 </template>
@@ -57,17 +55,11 @@ export default {
         user = firebaseInstance.firebase.auth().currentUser;
       }
 
-      if (user) {
-        // user is signed in.
-        return true;
-      } else {
-        // No user is signed in.
-        return false;
-      }
+      return !!user;
     },
 
-    goToRegisteredUsers() {
-      this.$router.push(`/registeredUsers`);
+    goToFavorites() {
+      this.$router.push(`/favorites`);
     },
     goToLoginPage() {
       this.$router.push(`/LoginPage`);
@@ -75,13 +67,12 @@ export default {
     goToRegisterPage() {
       this.$router.push(`/register`);
     },
-    gotToVideosPage(){
-      this.$router.push('/videos')
-    },
     goToBlogPage(){
       this.$router.push('/blog')
     },
-
+    goToAboutPage(){
+      this.$router.push('/about')
+    },
     signOut() {
       this.isConnected = false;
       window.user = undefined

@@ -17,8 +17,10 @@
     <q-tab-panels v-for="article of this.articles" v-model="tab" animated class="bg-teal-2 text-dark">
       <q-tab-panel v-if="article.userUid === isAdmin" name="mainArticles">
         {{article.userName}}
+        <br>
+        {{article.date}}
         <div @click="$router.push(`/article/${article.id}`)" class="text-h6 articleTabs">
-          <a>{{article.context.title}}</a>
+          <a class="articleTitleTabs">{{article.context.title}}</a>
         </div>
         {{article.context.description}}
         <q-separator/>
@@ -29,7 +31,7 @@
       <q-tab-panel v-if="article.userUid !== isAdmin && article.approved === true" name="socialArticles">
         {{article.userName}}
         <div @click="$router.push(`/article/${article.id}`)" class="text-h6 articleTabs">
-          <a>{{article.context.title}}</a>
+          <a class="articleTitleTabs">{{article.context.title}}</a>
         </div>
         {{article.context.description}}
         <q-separator/>
@@ -88,6 +90,15 @@ export default {
 .globalArticles{
   overflow-y: scroll;
   max-height: 400px;
+}
+
+.articleTitleTabs {
+  color: #027BE3;
+  border-bottom: 1px #027BE3 solid;
+}
+
+.articleTitleTabs:hover {
+  color: #9C27B0;
 }
 
 

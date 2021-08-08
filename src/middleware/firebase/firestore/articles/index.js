@@ -1,10 +1,15 @@
 import firebaseInstance from '../../';
 
 
- async function insertCollection(object) {
+async function insertArticle(object) {
     object.id = firebaseInstance.firebase.firestore().collection(`articles`).doc().id;
-   await firebaseInstance.firebase.firestore().collection(`articles`).doc(object.id).set(object)
+    await firebaseInstance.firebase.firestore().collection(`articles`).doc(object.id).set(object)
 }
+
+async function insertSavedArticle(object) {
+   await firebaseInstance.firebase.firestore().collection('users').doc(window.user.uid).collection('savedArticles').doc(object.id).set(object)
+}
+
 
 async function getHoldedArticles() {
     const arr = []
@@ -13,7 +18,17 @@ async function getHoldedArticles() {
             docs.forEach(doc => {
                 arr.push(doc.data())
             });
-            console.log(arr);
+        });
+    return arr;
+}
+
+async function getSavedArticles() {
+    const arr = []
+    await firebaseInstance.firebase.firestore().collection('users').doc(window.user.uid).collection('savedArticles').get()
+        .then(docs => {
+            docs.forEach(doc => {
+                arr.push(doc.data())
+            });
         });
     return arr;
 }
@@ -27,14 +42,27 @@ async function getSpecArticle(Id) {
     return article;
 }
 
-async function deleteArticleById(id){
-     return await firebaseInstance.firebase.firestore().collection('articles').doc(id).delete()
+async function deleteArticleById(id) {
+    return await firebaseInstance.firebase.firestore().collection('articles').doc(id).delete()
+}
+
+async function deleteArticleFromFavoritesById(id){
+    return await firebaseInstance.firebase.firestore().collection('users').doc(window.user.uid).collection('savedArticles').doc(id).delete()
+}
+
+
+async function updateArticle(article) {
+    return await firebaseInstance.firebase.firestore().collection('articles').doc(article.id).update(article)
 }
 
 
 export default {
-    insertCollection,
+    insertArticle,
+    insertSavedArticle,
     getHoldedArticles,
+    getSavedArticles,
     getSpecArticle,
     deleteArticleById,
+    deleteArticleFromFavoritesById,
+    updateArticle,
 }

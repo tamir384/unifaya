@@ -16,7 +16,7 @@ export default {
         Object.assign(video, state.editedVideo);
 
 
-        await firestore.insertCollection(video);
+        await firestore.insertVideo(video);
 
 
         commit('resetEditedVideo');

@@ -4,10 +4,13 @@ import firestore from '../../middleware/firebase/firestore/articles';
 export default {
 
     insertArticle: async ({}, context) => {
-        debugger
-       await firestore.insertCollection(context)
+        await firestore.insertArticle(context)
             .catch(e => console.error(e))
-        debugger;
+    },
+
+    saveArticleAC: async ({}, context) => {
+        await firestore.insertSavedArticle(context)
+            .catch(e => console.error(e))
     },
 
 
@@ -19,13 +22,20 @@ export default {
 
     },
 
-    getArticleByIdAC: async ({commit}, articleId) =>{
+    getSavedArticlesAC: async ({commit}) => {
+
+        const articles = await firestore.getSavedArticles();
+
+        commit('setArticles', articles)
+    },
+
+    getArticleByIdAC: async ({commit}, articleId) => {
         const article = await firestore.getSpecArticle(articleId);
 
         commit('setArticle', article)
     },
 
-    deleteArticle: async ({state, commit},id) => {
+    deleteArticle: async ({state, commit}, id) => {
 
         await firestore.deleteArticleById(id);
 
@@ -33,6 +43,21 @@ export default {
 
         commit('resetEditedArticleId');
 
+    },
+    deleteArticleFromFavorites: async ({state, commit}, id) => {
+
+        await firestore.deleteArticleFromFavoritesById(id);
+
+        commit('deleteArticle');
+
+        commit('resetEditedArticleId');
+    },
+
+    updateArticle: async ({state, commit}, article) => {
+
+        await firestore.updateArticle(article);
+
+        commit('editArticle')
     },
 
 

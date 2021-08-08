@@ -41,6 +41,9 @@ export default {
       userName: (window.user.displayName) || localStorage.getItem('displayName'),
       userUid: (window.user.uid),
       isAdmin: window.user.uid === "h8aXlN8o8Ggp8KeJHS4YYevm0DT2",
+      approved: false,
+      timestamp: '',
+      miliseconds: undefined,
     }
   },
   computed: {
@@ -55,19 +58,45 @@ export default {
     goToHomePage() {
       this.$router.push('/');
     },
-    uploadText() {
-      firestore.insertCollection({
+    async uploadText() {
+      this.getNow();
+      await firestore.insertArticle({
         context: this.context,
         userName: this.userName,
         userUid: window.user.uid,
-        approved: false
+        approved: this.approved,
+        date: this.timestamp,
+        miliseconds: this.miliseconds,
       });
+      // for (const key in this.context){
+      //   this.context.key = '';
+      // }
+      if (this.approved === false) {
+        alert('תודה! המאמר נשלח ויפורסם באתר ברגע שיאושר ע"י צוות האתר')
+      }
+      for (const key in this.context) {
+        this.context[key] = '';
+      }
     },
+
+    getNow: function () {
+      const today = new Date();
+      const date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const miliSeconds = today.getTime();
+      const dateTime = date + ' | ' + time;
+      this.timestamp = dateTime;
+      this.miliseconds = miliSeconds;
+    },
+
     goToApproveArticles() {
       this.$router.push('/ApproveArticles')
     }
   },
   created() {
+    if (this.isAdmin) {
+      this.approved = true
+    }
   }
 }
 </script>
@@ -79,7 +108,5 @@ export default {
   font-size: 50px;
 }
 
-#newArtBtn {
-}
 
 </style>
