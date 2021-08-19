@@ -21,7 +21,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <q-btn v-if="window.user.uid" @click="saveArticle()"
+    <q-btn v-if="userUid" @click="saveArticle()"
            style=" font-size: 120%; font-weight: bold; width: 10%; background-color: rgba(255,255,255,0.63)" glossy
            class="fixed-top-right" :icon="'add'">הוספה למועדפים
     </q-btn>
@@ -37,8 +37,11 @@ import {mapActions, mapState} from 'vuex'
 
 export default {
   name: "Article",
+
+
   data() {
-    return {}
+    return {  userUid: window.user.uid || localStorage.getItem('uid'),
+    }
   },
 
   computed: {

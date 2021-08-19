@@ -13,13 +13,13 @@
     >
       <template v-slot:body-cell-articleLink="props">
         <q-td key="articleLink" :props="props">
-          <a @click="$router.push(`/article/${props.row.id}`)">{{ props.row.id }}</a>
+          <a @click="$router.push(`/article/${props.row.id}`)">צפייה במאמר</a>
         </q-td>
       </template>
 
       <template v-slot:body-cell-actions="props">
         <q-td key="actions" :props="props">
-          <q-btn @click="deleteArticleById(props.row.id)">delete</q-btn>
+          <q-btn @click="deleteArticleById(props.row.id)">מחיקה</q-btn>
         </q-td>
       </template>
     </q-table>
@@ -43,46 +43,31 @@ export default {
       columns: [
         {
           name: 'date',
-          label: 'Date',
+          label: 'תאריך כתיבת הפוסט',
           align: 'left',
           field: row => row.date,
           sortable: true
         },
         {
           name: 'name',
-          label: 'Username',
+          label: 'שם הכותב',
           align: 'left',
           field: row => row.userName,
           sortable: true
         },
-        {name: 'userId', align: 'center', label: 'userId', field: row => row.userUid},
         {
           name: 'Article Title',
-          style: 'white-space: nowrap; max-width: 15px; width: 100px; overflow: hidden; text-overflow: "----";',
           align: 'center',
-          label: 'Article Title',
+          label: 'כותרת המאמר',
           field: row => row.context.title
-        },
-        {
-          name: 'text',
-          style: 'white-space: nowrap; max-width: 5px; width: 100px; overflow: hidden; text-overflow: "----";',
-          label: 'Text',
-          field: row => row.context.text,
-          sortable: true
-        },
-        {
-          name: 'description',
-          style: 'white-space: nowrap; max-width: 50px; width: 100px; overflow: hidden; text-overflow: "----";',
-          label: 'Description',
-          field: row => row.context.description
         },
         {
           name: 'articleLink',
           style: 'white-space: nowrap; max-width: 50px; width: 300px; overflow: hidden; text-overflow: "----";',
-          label: 'Link To Article',
+          label: 'לינק למאמר',
           field: 'articleLink'
         },
-        {name: 'actions', align: 'center', label: 'Actions'},
+        {name: 'actions', align: 'center', label: 'פעולות'},
       ],
     }
   },

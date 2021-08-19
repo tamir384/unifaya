@@ -1,7 +1,7 @@
 <template>
   <div class="blogTabBox">
     <h1 id="mainHeaderBlog" class="mainHeadersTxt">מאמרים</h1>
-    <q-btn style=" width: 9%; background-color: rgba(255,0,0,0.67)" glossy id="editButton" @click="postNewArticle()">כתיבת מאמר</q-btn>
+    <q-btn style=" width: 9%; background-color: rgba(255,0,0,0.67)" v-if="userUid" glossy id="editButton" @click="postNewArticle()">כתיבת מאמר</q-btn>
     <q-tabs
         v-model="tab"
         inline-label
@@ -50,6 +50,7 @@ export default {
     return {
       tab: 'asdasd',
       isAdmin: 'h8aXlN8o8Ggp8KeJHS4YYevm0DT2',
+      userUid: window.user.uid || localStorage.getItem('uid'),
     }
   },
   computed:{

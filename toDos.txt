@@ -1,0 +1,1 @@
+1. in the blog page, without a user logged-in, there is a problem with displaying the articles on the page.
